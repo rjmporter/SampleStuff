@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="TscRedesign" Class="myDbDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DEVSQL02;Initial Catalog=TscRedesign;Integrated Security=True" SettingsObjectName="SQL_LINQ_SAMPLE.Properties.Settings" SettingsPropertyName="TscRedesignConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Price" Member="Prices">
+    <Type Name="Price">
+      <Column Name="PriceID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PriceGroupID" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="PriceDesc" Type="System.String" DbType="NVarChar(24)" CanBeNull="true" />
+      <Column Name="PriceSeatRngMin" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="PriceSeatRngMax" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="SKUID" Type="System.String" DbType="VarChar(12) NOT NULL" CanBeNull="false" />
+      <Column Name="PricePerUnit" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="PayFrequencyID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TrainingID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="UpgradePrice" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Association Name="SKU_Price" Member="SKU" ThisKey="SKUID" OtherKey="SKUID" Type="SKU" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DigitalRiverProducts" Member="DigitalRiverProducts">
+    <Type Name="DigitalRiverProduct">
+      <Column Name="DigitalRiverID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SKUID" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="ShipMethodID" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="OrdDetTypeID" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="PayFrequencyID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="InternationalShipMethodId" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Association Name="SKU_DigitalRiverProduct" Member="SKU" ThisKey="SKUID" OtherKey="SKUID" Type="SKU" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SKU" Member="SKUs">
+    <Type Name="SKU">
+      <Column Name="SKUID" Type="System.String" DbType="VarChar(12) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SKUBaseID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="SKUProdType" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="SKUProdRelVer" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="SKUProdLang" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="SKUProdForm" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="SKUDesc" Type="System.String" DbType="VarChar(64)" CanBeNull="true" />
+      <Column Name="SKUComment" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="SKUCamPercRev" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="SKUSnagPercRev" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="SKUPharPercRev" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="SKUShipDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="SKUAcctID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="SKUActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ProductGroupID" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="SKULabelPaper" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SKUPrintKey" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SKUShipSeperate" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SKUStoreAPIRecord" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SKUDisplayOrder" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="SKU_DigitalRiverProduct" Member="DigitalRiverProducts" ThisKey="SKUID" OtherKey="SKUID" Type="DigitalRiverProduct" />
+      <Association Name="SKU_Price" Member="Prices" ThisKey="SKUID" OtherKey="SKUID" Type="Price" />
+    </Type>
+  </Table>
+</Database>
